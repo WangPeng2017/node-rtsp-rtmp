@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>ckplayer</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0px;
+            font-family: "Microsoft YaHei", YaHei, "微软雅黑", SimHei, "黑体";
+            font-size: 14px
+        }
+    </style>
+</head>
+
+<body>
+    <select name="" id="batList">
+        <option value=""></option>
+    </select>
+    <button id="runBat">运行</button>
+    <div id="video" style="width: 600px; height: 400px;"></div>
+    <script src="./javascripts/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="./ckplayer/ckplayer.js"></script>
+    <script type="text/javascript">
+        var videoObject = {
+            container: '#video', //容器的ID或className
+            variable: 'player',//播放函数名称
+            autoplay: false,
+            live: true,
+            video: 'rtmp://localhost:1935/live/test'
+        };
+        var player = new ckplayer(videoObject);
+    </script>
+    <script type="text/javascript">
+        $.get("getBatList", function (res) {
+           if(res.code) {
+               var str = "";
+               $.each(res.data, function(index, item){
+                    str += '<option value="'+ item +'">'+ item +'</option>'
+               })
+               $("#batList").html(str);
+           }
+        });
+
+        $("#runBat").on("click", function(){
+            $.post("runBat", {batName: $("#batList").val()}, function (res) {
+                if(res.code){
+                    alert("运行成功！")
+                }else{
+                    alert("运行失败！")
+                }
+            });
+        })
+    </script>
+
+</body>
+
+</html>
