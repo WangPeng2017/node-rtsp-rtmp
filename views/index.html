@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>ckplayer</title>
+    <style type="text/css">
+        body{
+            background: url('./images/bg1.png');
+            background-size: cover;
+        }
+
+        .section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: 0;
+            padding: 0px;
+            font-family: "Microsoft YaHei", YaHei, "微软雅黑", SimHei, "黑体";
+            font-size: 14px;
+            width: 100%;
+            height: 100%;
+            background: url('./images/bg2.png') no-repeat;
+            background-size: auto 95%;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        .section .left{
+            float: left;
+            width: 50%;
+            display: block;
+            height: 100%;
+            position: relative;
+        }
+
+        .section .right{
+            float: right;
+            width: 50%;
+            display: block;
+            height: 100%;
+            position: relative;
+        }
+
+        .section .left .btn{
+            display: block;
+            cursor: pointer;
+            position: absolute;
+            right: 80px;
+        }
+
+        .section .right .btn{
+            display: block;
+            cursor: pointer; 
+            position: absolute;
+            left: 320px;
+        }
+
+        .section .left .btn img, .section .right .btn img{
+            width: 100%;
+        }
+
+        .left .btn1{
+            top: 180px;
+        }
+
+        .left .btn2{
+            top: 260px;
+        }
+        .left .btn3{
+            top: 330px;
+        }
+        .left .btn4{
+            top: 410px;
+        }
+        .left .btn5{
+            top: 545px;
+        }
+
+        .left .btn6{
+            top: 635px;
+        }
+
+        .right .btn1{
+            top: 175px;
+        }
+
+        .right .btn2{
+            top: 270px;
+        }
+        .right .btn3{
+            top: 340px;
+        }
+        .right .btn4{
+            top: 425px;
+        }
+        .section .right .btn5{
+            left: 280px;
+            top: 580px;
+        }
+
+
+        .linebox{
+            display: block;
+            width: 336px;
+            height: 438px;
+            cursor: pointer;
+            position: absolute;
+            right: 155px;
+            top: 115px;
+            border: 1px solid red;
+        }
+
+        .linebox .line {
+
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="section">
+        <div class="left">
+            <span class="btn btn1">
+                <img src="./images/server_L1down.png" alt="" class="calc" />
+            </span>
+            <span class="btn btn2">
+                <img src="./images/server_L2down.png" alt="" class="calc" />
+            </span>
+            <span class="btn btn3">
+                <img src="./images/down_L2down.png" alt="" class="calc" />
+            </span>
+            <span class="btn btn4">
+                <img src="./images/down_L1down.png" alt="" class="calc" />
+            </span>
+            <span class="btn btn5">
+                <img src="./images/down_L2down.png" alt="" class="calc" />
+            </span>
+            <span class="btn btn6">
+                <img src="./images/down_L1down.png" alt="" class="calc" />
+            </span>
+
+            <div class="linebox">
+                <span class="line line1">
+                    <img src="./images/a.png" alt="" class="calc" />
+                </span>
+            </div>
+        </div>
+        <div class="right">
+            <span class="btn btn1">
+                <img src="./images/up_L1down.png" alt="" class="calc" />
+            </span>
+            <span class="btn btn2">
+                <img src="./images/up_L2down.png" alt="" class="calc" />
+            </span>
+            <span class="btn btn3">
+                <img src="./images/up_L1down.png" alt="" class="calc" />
+            </span>
+            <span class="btn btn4">
+                <img src="./images/up_L2down.png" alt="" class="calc" />
+            </span>
+            <span class="btn btn5">
+                <img src="./images/reset.png" alt="" class="calc" />
+            </span>
+        </div>
+
+       
+
+    </div>
+
+    <!-- <select name="" id="batList">
+        <option value=""></option>
+    </select>
+    <button id="runBat">运行</button> -->
+    <!-- <div id="video" style="width: 600px; height: 400px;"></div> -->
+
+   
+</body>
+</html>
+<script src="./javascripts/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="./ckplayer/ckplayer.js"></script>
+<script type="text/javascript">
+    var videoObject = {
+        container: '#video', //容器的ID或className
+        variable: 'player',//播放函数名称
+        autoplay: false,
+        live: true,
+        video: 'rtmp://localhost:1935/live/test'
+    };
+    var player = new ckplayer(videoObject);
+</script>
+
+<script>
+    (function () {
+        function setCalc(params) {
+            var clientHeight = document.documentElement.clientHeight;
+            if (!clientHeight) return;
+            window.calc = clientHeight / (1080 * 0.95);
+
+            $('.btn').width(calc * 141 + "px");
+
+            $('.right .btn5').width(calc * 176 + "px");
+
+            $('.linebox').width(calc * 336 + "px").height(calc * 438 + "px");;
+
+            $('.left .btn').each(function(index, item) {
+                var top = parseInt($(item).css("top"));
+                var right = parseInt($(item).css("right"));
+                $(item).css("top", calc * top + "px").css("right", calc * right + "px");
+            });
+
+            $('.right .btn').each(function(index, item) {
+                var top = parseInt($(item).css("top"));
+                var left = parseInt($(item).css("left"));
+                $(item).css("top", calc * top + "px").css("left", calc * left + "px");
+            });
+
+        }
+        window.onresize = function () {
+           setCalc();
+        }
+        setCalc();
+    }())
+    
+
+</script>
+<script type="text/javascript">
+    $.get("getBatList", function (res) {
+        if (res.code) {
+            var str = "";
+            $.each(res.data, function (index, item) {
+                str += '<option value="' + item + '">' + item + '</option>'
+            })
+            $("#batList").html(str);
+        }
+    });
+
+    $("#runBat").on("click", function () {
+        $.post("runBat", { batName: $("#batList").val() }, function (res) {
+            if (res.code) {
+                alert("运行成功！")
+            } else {
+                alert("运行失败！")
+            }
+        });
+    })
+</script>

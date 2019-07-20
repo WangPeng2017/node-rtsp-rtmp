@@ -4,7 +4,7 @@ var bat = require('../bat')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index/index', { title: 'Express' });
+  res.render('index', { title: 'Express' });
 });
 
 router.get('/getBatList', function(req, res, next) {
