@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>锐捷数据中心</title>
+    <link href="./videojs/video-js.css" rel="stylesheet">
     <style type="text/css">
         body{
             background: url('./images/bg1.png');
@@ -12,6 +13,7 @@
         }
 
         img{
+            display: block;
             width: 100%;
         }
 
@@ -27,26 +29,30 @@
             font-size: 14px;
             width: 100%;
             height: 100%;
-            background: url('./images/bg2.png') no-repeat;
+            /* background: url('./images/bg2.png') no-repeat; */
             background-size: auto 95%;
+            -ms-behavior: url(./backgroundsize.min.htc);
+            behavior: url(./backgroundsize.min.htc);
             background-position: center;
             overflow: hidden;
         }
 
         .section .left{
-            float: left;
             width: 50%;
             display: block;
             height: 100%;
-            position: relative;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
         .section .right{
-            float: right;
             width: 50%;
             display: block;
             height: 100%;
-            position: relative;
+            position: absolute;
+            top: 0;
+            right: 0;
         }
 
         .section .left .btn{
@@ -113,8 +119,8 @@
             height: 438px;
             cursor: pointer;
             position: absolute;
-            right: 155px;
-            top: 115px;
+            right: 255px;
+            top: 190px;
         }
 
         .linebox .line {
@@ -134,12 +140,12 @@
         }
 
         .linebox .line1 {
-            top: 63px;
+            top: 60px;
             left: 105px;
         }
 
         .linebox .line2 {
-            top: 63px;
+            top: 60px;
             left: 150px;
         }
 
@@ -184,7 +190,7 @@
         }
 
         .linebox .line11 {
-            top: 370px;
+            top: 367px;
             left: 147px;
         }
 
@@ -200,20 +206,21 @@
         }
 
         #video1{
-            top: 440px;
-            right: 65px;
+            bottom: 28px;
+            right: 107px;
         }
-
         #video2{
-            top: 470px;
-            left: 165px;
+            bottom: 65px;
+            left: 272px;
         }
 
-    </style>
+    </style> 
+    <script src="./videojs/videojs-ie8.min.js"></script>
 </head>
 
 <body>
     <div class="section">
+        <img src="./images/bg2.png" alt="" class="calc" />
         <div class="left">
             <span class="btn btn1">
                 <img src="./images/server_L1down.png" alt="" class="calc" />
@@ -305,7 +312,8 @@
             <div class="askProduct">
                 <img src="./images/askProduct.png" alt="" class="calc" />
             </div>
-            <video id="video2" class="video-js vjs-default-skin" autoplay="autoplay" preload="auto"  data-setup="{}">
+
+            <video id="video2" class="video-js vjs-default-skin" autoplay="autoplay" preload="auto"  data-setup='{"techOrder": ["flash"]}'>
                 <source src="rtmp://localhost:1935/live/test" type="rtmp/flv">
                 <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
             </video>
@@ -313,130 +321,141 @@
     </div>
 </body>
 </html>
-<script src="./javascripts/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="./ckplayer/ckplayer.js"></script>
-<link href="./videojs/video-js.css" rel="stylesheet">
-<script src="./videojs/videojs-ie8.min.js"></script>
-<script src="./videojs/video.min.js"></script>
 
+<script src="./videojs/video.min.js"></script>
+<script>
+    videojs.options.flash.swf = "videojs/video-js.swf";
+</script>
+<script src="./javascripts/jquery-1.8.0.min.js"></script>
 
 <script>
-    (function () {
-        function init() {
+    function init() {
             $(".left .btn1").on("click", function() {
-                runBat("服务器L1 down", toggle.bind(".line1") );
+                runBat("服务器L1 down", toggle.bind({tar:".line1"}));
             })
             $(".left .btn2").on("click", function() {
-                runBat("服务器L2 down", toggle.bind(".line2"));
+                runBat("服务器L2 down", toggle.bind({tar:".line2"}));
             })
             $(".left .btn3").on("click", function() {
                 // $(".line6").toggleClass("disable");
-                runBat("下联1_L2 down", toggle.bind(".line6"));
+                runBat("下联1_L2 down", toggle.bind({tar:".line6"}));
             })
             $(".left .btn4").on("click", function() {
                 // $(".line5").toggleClass("disable");
-                runBat("下联1_L1 down", toggle.bind(".line5"));
+                runBat("下联1_L1 down", toggle.bind({tar:".line5"}));
             })
             $(".left .btn5").on("click", function() {
                 // $(".line10").toggleClass("disable");
-                runBat("下联L2 down", toggle.bind(".line10"));
+                runBat("下联L2 down", toggle.bind({tar:".line10"}));
             })
             $(".left .btn6").on("click", function() {
                 // $(".line9").toggleClass("disable");
-                runBat("下联L1 down", toggle.bind(".line9"));
+                runBat("下联L1 down", toggle.bind({tar:".line9"}));
             })
 
             $(".right .btn1").on("click", function() {
                 // $(".line3").toggleClass("disable");
-                runBat("上联1_L1 down", toggle.bind(".line3"));
+                runBat("上联1_L1 down", toggle.bind({tar:".line3"}));
             })
             $(".right .btn2").on("click", function() {
                 // $(".line4").toggleClass("disable");
-                runBat("上联1_L2 down", toggle.bind(".line4"));
+                runBat("上联1_L2 down", toggle.bind({tar:".line4"}));
             })
             $(".right .btn3").on("click", function() {
                 // $(".line7").toggleClass("disable");
-                runBat("上联L1 down", toggle.bind(".line7"));
+                runBat("上联L1 down", toggle.bind({tar:".line7"}));
             })
             $(".right .btn4").on("click", function() {
                 // $(".line8").toggleClass("disable");
-                runBat("上联L2 down", toggle.bind(".line8"));
+                runBat("上联L2 down", toggle.bind({tar:".line8"}));
             })
             $(".right .btn5").on("click", function() {
                 // $(".line").removeClass("disable");
-                runBat("一键还原", toggle.bind(".line"));
+                runBat("一键还原", toggle.bind({tar:".line"}));
             })
         }
-        function runBat (name, calback){
-            $.post("runBat", { batName: name }, function (res) {
-                if (res.code) {
-                    // alert("运行成功！")
-                    calback();
-                } else {
-                    alert("运行失败！")
-                }
-            });
-        }
-        function toggle(tar){
-            if(tar != ".line"){
-                $(tar).toggleClass("disable");
-            }else{
-                $(tar).removeClass("disable");
+    function runBat (name, calback){
+        $.post("runBat", { batName: name }, function (res) {
+            if (res.code) {
+                // alert("运行成功！")
+                calback();
+            } else {
+                alert("运行失败！")
             }
-            
+        });
+    }
+    function toggle(){
+        if(this.tar != ".line"){
+            $(this.tar).toggleClass("disable");
+        }else{
+            $(this.tar).removeClass("disable");
         }
-        function setCalc(params) {
-            var clientHeight = document.documentElement.clientHeight;
-            if (!clientHeight) return;
-            window.calc = clientHeight / (1080 * 0.95);
+        
+    }
+    function setCalc(params) {
+        var clientHeight = document.documentElement.clientHeight;
+        if (!clientHeight) return;
+        window.calc = clientHeight / (1080 * 0.95);
 
-            $('.btn').width(calc * 141 + "px");
+        $('.section > img').height(clientHeight * 0.95 + "px").width("auto").css("margin", "auto").css("marginTop", clientHeight * 0.025 + "px");
 
-            $('.line1').width(calc * 55 + "px");
-            $('.line2').width(calc * 55 + "px");
-            $('.line3').width(calc * 26 + "px");
-            $('.line4').width(calc * 26 + "px");
-            $('.line5').width(calc * 121 + "px");
-            $('.line6').width(calc * 121 + "px");
+        $('.btn').width(calc * 141 + "px");
 
-            $('.line7').width(calc * 26 + "px");
-            $('.line8').width(calc * 26 + "px");
-            $('.line9').width(calc * 121 + "px");
-            $('.line10').width(calc * 121 + "px");
-            $('.line11').width(calc * 18 + "px");
-            $('.askProduct').width(calc * 59 + "px");
-            $('.right .btn5').width(calc * 176 + "px");
+        $('.line1').width(calc * 55 + "px");
+        $('.line2').width(calc * 55 + "px");
+        $('.line3').width(calc * 26 + "px");
+        $('.line4').width(calc * 26 + "px");
+        $('.line5').width(calc * 121 + "px");
+        $('.line6').width(calc * 121 + "px");
 
-            $('#video1').width(calc * 490 + "px").height(calc * 280 + "px");
-            $('#video2').width(calc * 330 + "px").height(calc * 190 + "px");
+        $('.line7').width(calc * 26 + "px");
+        $('.line8').width(calc * 26 + "px");
+        $('.line9').width(calc * 121 + "px");
+        $('.line10').width(calc * 121 + "px");
+        $('.line11').width(calc * 18 + "px");
+        $('.askProduct').width(calc * 59 + "px");
+        $('.right .btn5').width(calc * 176 + "px");
 
-            $('.linebox').width(calc * 336 + "px").height(calc * 438 + "px");;
+        $('#video1').width(calc * 485 + "px").height(calc * 275 + "px");
+        $('#video2').width(calc * 325 + "px").height(calc * 185 + "px");
+        $('.linebox').width(calc * 336 + "px").height(calc * 438 + "px").css("top", calc * parseInt($('.linebox').css("top")) + "px").css("right", calc * parseInt($('.linebox').css("right")) + "px");
 
-            $('.left .btn').each(function(index, item) {
-                var top = parseInt($(item).css("top"));
-                var right = parseInt($(item).css("right"));
-                $(item).css("top", calc * top + "px").css("right", calc * right + "px");
-            });
+        $('.left .btn').each(function(index, item) {
+            var top = parseInt($(item).css("top"));
+            var right = parseInt($(item).css("right"));
+            $(item).css("top", calc * top + "px").css("right", calc * right + "px");
+        });
 
-            $('.right .btn').each(function(index, item) {
-                var top = parseInt($(item).css("top"));
-                var left = parseInt($(item).css("left"));
-                $(item).css("top", calc * top + "px").css("left", calc * left + "px");
-            });
+        $('.right .btn').each(function(index, item) {
+            var top = parseInt($(item).css("top"));
+            var left = parseInt($(item).css("left"));
+            $(item).css("top", calc * top + "px").css("left", calc * left + "px");
+        });
 
-            $('.line').each(function(index, item) {
-                var top = parseInt($(item).css("top"));
-                var left = parseInt($(item).css("left"));
-                $(item).css("top", calc * top + "px").css("left", calc * left + "px");
-            });
 
-        }
-        window.onresize = function () {
-           setCalc();
-        }
-        setCalc();
-        init();
-    }())
+        $('.left .video-js').each(function(index, item) {
+            var bottom = parseInt($(item).css("bottom"));
+            var right = parseInt($(item).css("right"));
+            $(item).css("bottom", calc * bottom + "px").css("right", calc * right + "px");
+        });
+
+        $('.right .video-js').each(function(index, item) {
+            var bottom = parseInt($(item).css("bottom"));
+            var left = parseInt($(item).css("left"));
+            $(item).css("bottom", calc * bottom + "px").css("left", calc * left + "px");
+        });
+
+
+        $('.line').each(function(index, item) {
+            var top = parseInt($(item).css("top"));
+            var left = parseInt($(item).css("left"));
+            $(item).css("top", calc * top + "px").css("left", calc * left + "px");
+        });
+
+    }
+
+    setCalc();
+    init();
 </script>
 
 <!-- <script type="text/javascript">
