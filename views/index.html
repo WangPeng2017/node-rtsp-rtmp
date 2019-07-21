@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>ckplayer</title>
+    <title>锐捷数据中心</title>
     <style type="text/css">
         body{
             background: url('./images/bg1.png');
@@ -192,16 +192,21 @@
             position: absolute;
             left: 330px;
             top: 160px;
+            cursor: pointer;
         }
 
         #video1, #video2{
-            /* position: absolute !important; */
+            position: absolute !important;
         }
 
-        #video3{
-            position: absolute;
-            top: 0;
-            left: 0;
+        #video1{
+            top: 440px;
+            right: 65px;
+        }
+
+        #video2{
+            top: 470px;
+            left: 165px;
         }
 
     </style>
@@ -275,6 +280,10 @@
                     <img src="./images/gg.png" alt="" class="calc error" />
                 </span>
             </div>
+            <video id="video1" class="video-js vjs-default-skin" autoplay preload="auto"  data-setup="{}">
+                <source src="rtmp://localhost:1935/live/test" type="rtmp/flv">
+                <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+            </video>
         </div>
         <div class="right">
             <span class="btn btn1">
@@ -296,74 +305,85 @@
             <div class="askProduct">
                 <img src="./images/askProduct.png" alt="" class="calc" />
             </div>
+            <video id="video2" class="video-js vjs-default-skin" autoplay="autoplay" preload="auto"  data-setup="{}">
+                <source src="rtmp://localhost:1935/live/test" type="rtmp/flv">
+                <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+            </video>
         </div>
     </div>
-    
-    <div id="video1" style="width: 480px; height: 270px;"></div>
-    <div id="video2" style="width: 320px; height: 180px;"></div>
 </body>
 </html>
 <script src="./javascripts/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="./ckplayer/ckplayer.js"></script>
+<link href="./videojs/video-js.css" rel="stylesheet">
+<script src="./videojs/videojs-ie8.min.js"></script>
+<script src="./videojs/video.min.js"></script>
 
 
 <script>
     (function () {
         function init() {
             $(".left .btn1").on("click", function() {
-                $(".line1").toggleClass("disable");
-                runBat("服务器L1 down");
+                runBat("服务器L1 down", toggle.bind(".line1") );
             })
             $(".left .btn2").on("click", function() {
-                $(".line2").toggleClass("disable");
-                runBat("服务器L2 down");
+                runBat("服务器L2 down", toggle.bind(".line2"));
             })
             $(".left .btn3").on("click", function() {
-                $(".line6").toggleClass("disable");
-                runBat("下联1_L2 down");
+                // $(".line6").toggleClass("disable");
+                runBat("下联1_L2 down", toggle.bind(".line6"));
             })
             $(".left .btn4").on("click", function() {
-                $(".line5").toggleClass("disable");
-                runBat("下联1_L1 down");
+                // $(".line5").toggleClass("disable");
+                runBat("下联1_L1 down", toggle.bind(".line5"));
             })
             $(".left .btn5").on("click", function() {
-                $(".line10").toggleClass("disable");
-                runBat("下联L2 down");
+                // $(".line10").toggleClass("disable");
+                runBat("下联L2 down", toggle.bind(".line10"));
             })
             $(".left .btn6").on("click", function() {
-                $(".line9").toggleClass("disable");
-                runBat("下联L1 down");
+                // $(".line9").toggleClass("disable");
+                runBat("下联L1 down", toggle.bind(".line9"));
             })
 
             $(".right .btn1").on("click", function() {
-                $(".line3").toggleClass("disable");
-                runBat("上联1_L1 down");
+                // $(".line3").toggleClass("disable");
+                runBat("上联1_L1 down", toggle.bind(".line3"));
             })
             $(".right .btn2").on("click", function() {
-                $(".line4").toggleClass("disable");
-                runBat("上联1_L2 down");
+                // $(".line4").toggleClass("disable");
+                runBat("上联1_L2 down", toggle.bind(".line4"));
             })
             $(".right .btn3").on("click", function() {
-                $(".line7").toggleClass("disable");
-                runBat("上联L1 down");
+                // $(".line7").toggleClass("disable");
+                runBat("上联L1 down", toggle.bind(".line7"));
             })
             $(".right .btn4").on("click", function() {
-                $(".line8").toggleClass("disable");
-                runBat("");
+                // $(".line8").toggleClass("disable");
+                runBat("上联L2 down", toggle.bind(".line8"));
             })
             $(".right .btn5").on("click", function() {
-                $(".line").removeClass("disable");
-                runBat("上联L2 down");
+                // $(".line").removeClass("disable");
+                runBat("一键还原", toggle.bind(".line"));
             })
         }
-        function runBat (name){
+        function runBat (name, calback){
             $.post("runBat", { batName: name }, function (res) {
                 if (res.code) {
-                    alert("运行成功！")
+                    // alert("运行成功！")
+                    calback();
                 } else {
                     alert("运行失败！")
                 }
             });
+        }
+        function toggle(tar){
+            if(tar != ".line"){
+                $(tar).toggleClass("disable");
+            }else{
+                $(tar).removeClass("disable");
+            }
+            
         }
         function setCalc(params) {
             var clientHeight = document.documentElement.clientHeight;
@@ -387,8 +407,8 @@
             $('.askProduct').width(calc * 59 + "px");
             $('.right .btn5').width(calc * 176 + "px");
 
-            $('#video1').width(calc * 480 + "px").height(calc * 270 + "px");
-            $('#video2').width(calc * 320 + "px").height(calc * 180 + "px");
+            $('#video1').width(calc * 490 + "px").height(calc * 280 + "px");
+            $('#video2').width(calc * 330 + "px").height(calc * 190 + "px");
 
             $('.linebox').width(calc * 336 + "px").height(calc * 438 + "px");;
 
@@ -419,7 +439,7 @@
     }())
 </script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     var videoObject = {
         container: '#video1', //容器的ID或className
         variable: 'player',//播放函数名称
@@ -428,4 +448,4 @@
         video: 'rtmp://localhost:1935/live/test'
     };
     var player = new ckplayer(videoObject);
-</script>
+</script> -->
