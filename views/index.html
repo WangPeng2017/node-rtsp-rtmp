@@ -444,7 +444,6 @@
         }
     function runBat (name, calback){
         $.post("runBat", { batName: name }, function (res) {
-            calback();
             if (res.code) {
                 // alert("运行成功！")
                 calback();
