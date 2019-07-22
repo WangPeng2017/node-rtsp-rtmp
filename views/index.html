@@ -73,6 +73,22 @@
             width: 100%;
         }
 
+        .section .btn .down{
+            display: block;
+        }
+
+        .section .btn .up{
+            display: none;
+        }
+
+        .section .btn.active .down{
+            display: none;
+        }
+
+        .section .btn.active .up{
+            display: block;
+        }
+
         .left .btn1{
             top: 180px;
         }
@@ -223,22 +239,28 @@
         <img src="./images/bg2.png" alt="" class="calc" />
         <div class="left">
             <span class="btn btn1">
-                <img src="./images/server_L1down.png" alt="" class="calc" />
+                <img src="./images/server_L1down.png" alt="" class="calc down" />
+                <img src="./images/server_L1up.png" alt="" class="calc up" />
             </span>
             <span class="btn btn2">
-                <img src="./images/server_L2down.png" alt="" class="calc" />
+                <img src="./images/server_L2down.png" alt="" class="calc down" />
+                <img src="./images/server_L2up.png" alt="" class="calc up" />
             </span>
             <span class="btn btn3">
-                <img src="./images/down_L2down.png" alt="" class="calc" />
+                <img src="./images/down_L2down.png" alt="" class="calc down" />
+                <img src="./images/down_L2up.png" alt="" class="calc up" />
             </span>
             <span class="btn btn4">
-                <img src="./images/down_L1down.png" alt="" class="calc" />
+                <img src="./images/down_L1down.png" alt="" class="calc down" />
+                <img src="./images/down_L1up.png" alt="" class="calc up" />
             </span>
             <span class="btn btn5">
-                <img src="./images/down_L2down.png" alt="" class="calc" />
+                <img src="./images/down_L2down.png" alt="" class="calc down" />
+                <img src="./images/down_L2up.png" alt="" class="calc up" />
             </span>
             <span class="btn btn6">
-                <img src="./images/down_L1down.png" alt="" class="calc" />
+                <img src="./images/down_L1down.png" alt="" class="calc down" />
+                <img src="./images/down_L1up.png" alt="" class="calc up" />
             </span>
 
             <div class="linebox">
@@ -294,23 +316,27 @@
         </div>
         <div class="right">
             <span class="btn btn1">
-                <img src="./images/up_L1down.png" alt="" class="calc" />
+                <img src="./images/up_L1down.png" alt="" class="calc down" />
+                <img src="./images/up_L1up.png" alt="" class="calc up" />
             </span>
             <span class="btn btn2">
-                <img src="./images/up_L2down.png" alt="" class="calc" />
+                <img src="./images/up_L2down.png" alt="" class="calc down" />
+                <img src="./images/up_L2up.png" alt="" class="calc up" />
             </span>
             <span class="btn btn3">
-                <img src="./images/up_L1down.png" alt="" class="calc" />
+                <img src="./images/up_L1down.png" alt="" class="calc down" />
+                <img src="./images/up_L1up.png" alt="" class="calc up" />
             </span>
             <span class="btn btn4">
-                <img src="./images/up_L2down.png" alt="" class="calc" />
+                <img src="./images/up_L2down.png" alt="" class="calc down" />
+                <img src="./images/up_L2up.png" alt="" class="calc up" />
             </span>
             <span class="btn btn5">
                 <img src="./images/reset.png" alt="" class="calc" />
             </span>
 
             <div class="askProduct">
-                <a href="http://www.ruijie.com.cn/consult/">
+                <a href="http://www.ruijie.com.cn/consult/" target="_blank"> 
                     <img src="./images/askProduct.png" alt="" class="calc" />
                 </a>
             </div>
@@ -333,51 +359,92 @@
 <script>
     function init() {
             $(".left .btn1").on("click", function() {
-                runBat("服务器L1 down", toggle.bind({tar:".line1"}));
+                if($(this).hasClass("active")){
+                    runBat("服务器L1 up", toggle.bind({tar:".line1", that: this}));
+                }else{
+                    runBat("服务器L1 down", toggle.bind({tar:".line1", that: this}));
+                }
+                
             })
             $(".left .btn2").on("click", function() {
-                runBat("服务器L2 down", toggle.bind({tar:".line2"}));
+                if($(this).hasClass("active")){
+                    runBat("服务器L2 up", toggle.bind({tar:".line2", that: this}));
+                }else{
+                    runBat("服务器L2 down", toggle.bind({tar:".line2", that: this}));
+                }
+                
             })
             $(".left .btn3").on("click", function() {
-                // $(".line6").toggleClass("disable");
-                runBat("下联1_L2 down", toggle.bind({tar:".line6"}));
+                if($(this).hasClass("active")){
+                    runBat("下联L2 up", toggle.bind({tar:".line6", that: this}));
+                }else{
+                    runBat("下联L2 down", toggle.bind({tar:".line6", that: this}));
+                }
             })
             $(".left .btn4").on("click", function() {
-                // $(".line5").toggleClass("disable");
-                runBat("下联1_L1 down", toggle.bind({tar:".line5"}));
+                if($(this).hasClass("active")){
+                    runBat("下联L1 up", toggle.bind({tar:".line5", that: this}));
+                }else{
+                    runBat("下联L1 down", toggle.bind({tar:".line5", that: this}));
+                }
+                
             })
             $(".left .btn5").on("click", function() {
-                // $(".line10").toggleClass("disable");
-                runBat("下联L2 down", toggle.bind({tar:".line10"}));
+                if($(this).hasClass("active")){
+                    runBat("下联1_L2 up", toggle.bind({tar:".line10", that: this}));
+                }else{
+                    runBat("下联1_L2 down", toggle.bind({tar:".line10", that: this}));
+                }
+                
             })
             $(".left .btn6").on("click", function() {
-                // $(".line9").toggleClass("disable");
-                runBat("下联L1 down", toggle.bind({tar:".line9"}));
+                if($(this).hasClass("active")){
+                    runBat("下联1_L1 up", toggle.bind({tar:".line9", that: this}));
+                }else{
+                    runBat("下联1_L1 down", toggle.bind({tar:".line9", that: this}));
+                }
+                
             })
 
             $(".right .btn1").on("click", function() {
-                // $(".line3").toggleClass("disable");
-                runBat("上联1_L1 down", toggle.bind({tar:".line3"}));
+                if($(this).hasClass("active")){
+                    runBat("上联L1 up", toggle.bind({tar:".line3", that: this}));
+                }else{
+                    runBat("上联L1 down", toggle.bind({tar:".line3", that: this}));
+                }
+                
             })
             $(".right .btn2").on("click", function() {
-                // $(".line4").toggleClass("disable");
-                runBat("上联1_L2 down", toggle.bind({tar:".line4"}));
+                if($(this).hasClass("active")){
+                    runBat("上联L2 up", toggle.bind({tar:".line4", that: this}));
+                }else{
+                    runBat("上联L2 down", toggle.bind({tar:".line4", that: this}));
+                }
+                
             })
             $(".right .btn3").on("click", function() {
-                // $(".line7").toggleClass("disable");
-                runBat("上联L1 down", toggle.bind({tar:".line7"}));
+                if($(this).hasClass("active")){
+                    runBat("上联1_L1 up", toggle.bind({tar:".line7", that: this}));
+                }else{
+                    runBat("上联1_L1 down", toggle.bind({tar:".line7", that: this}));
+                }
+                
             })
             $(".right .btn4").on("click", function() {
-                // $(".line8").toggleClass("disable");
-                runBat("上联L2 down", toggle.bind({tar:".line8"}));
+                if($(this).hasClass("active")){
+                    runBat("上联1_L2 up", toggle.bind({tar:".line8", that: this}));
+                }else{
+                    runBat("上联1_L2 down", toggle.bind({tar:".line8", that: this}));
+                }
+                
             })
             $(".right .btn5").on("click", function() {
-                // $(".line").removeClass("disable");
-                runBat("一键还原", toggle.bind({tar:".line"}));
+                runBat("一键还原", toggle.bind({tar:".line", that: this}));
             })
         }
     function runBat (name, calback){
         $.post("runBat", { batName: name }, function (res) {
+            calback();
             if (res.code) {
                 // alert("运行成功！")
                 calback();
@@ -388,11 +455,12 @@
     }
     function toggle(){
         if(this.tar != ".line"){
+            $(this.that).toggleClass("active");
             $(this.tar).toggleClass("disable");
         }else{
+            $(this.that).removeClass("active");
             $(this.tar).removeClass("disable");
         }
-        
     }
     function setCalc(params) {
         var clientHeight = document.documentElement.clientHeight;
