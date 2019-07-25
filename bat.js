@@ -13,7 +13,7 @@ function run(batName, sucFun, erFun) {
 		batName += ".bat"
 	}
 	console.log(batName)
-	child_process.execFile(batName, null, { cwd: 'E:\\' }, function (error, stdout, stderr) {
+	child_process.execFile(batName, null, { cwd: 'C:\\' }, function (error, stdout, stderr) {
 		if (error !== null) {
 			erFun();
 			console.log("exec error" + error)
