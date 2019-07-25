@@ -212,8 +212,8 @@
 
         .askProduct{
             position: absolute;
-            left: 330px;
-            top: 160px;
+            left: 530px;
+            top: 270px;
             cursor: pointer;
         }
 
@@ -516,6 +516,12 @@
 
 
         $('.line').each(function(index, item) {
+            var top = parseInt($(item).css("top"));
+            var left = parseInt($(item).css("left"));
+            $(item).css("top", calc * top + "px").css("left", calc * left + "px");
+        });
+
+        $('.askProduct').each(function(index, item) {
             var top = parseInt($(item).css("top"));
             var left = parseInt($(item).css("left"));
             $(item).css("top", calc * top + "px").css("left", calc * left + "px");
