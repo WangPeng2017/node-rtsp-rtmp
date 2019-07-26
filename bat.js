@@ -12,13 +12,12 @@ function run(batName, sucFun, erFun) {
 	if(batName.indexOf(".bat") == -1){
 		batName += ".bat"
 	}
-	console.log(batName)
 	child_process.execFile(batName, null, { cwd: 'C:\\' }, function (error, stdout, stderr) {
 		if (error !== null) {
-			erFun();
+			erFun && erFun();
 			console.log("exec error" + error)
 		} else {
-			sucFun();
+			sucFun && sucFun();
 		}
 	})
 }

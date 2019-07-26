@@ -17,8 +17,6 @@ router.get('/getBatList', function(req, res, next) {
 router.post('/runBat', function(req, res, next) {
   var batFile = __dirname + "\\..\\public\\bat\\" + req.body.batName;
 
-  console.log(batFile)
-
   var sucFun = function() {
     res.json({
       code: 1
@@ -30,7 +28,8 @@ router.post('/runBat', function(req, res, next) {
     })
   }
 
-  bat.run(batFile, sucFun, errFun);
+  bat.run(batFile);
+  sucFun();
   
 });
 
