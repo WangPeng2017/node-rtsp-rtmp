@@ -230,6 +230,12 @@
             left: 272px;
         }
 
+        .tip{
+            bottom: 300px;
+            left: 270px;
+            position: absolute;
+        }
+
     </style> 
     <script src="./videojs/videojs-ie8.min.js"></script>
 </head>
@@ -341,7 +347,10 @@
                 </a>
             </div>
 
-            <video id="video2" class="video-js vjs-default-skin" autoplay preload="auto"  data-setup="{}">
+            <div class="tip">
+                <img src="./images/tip.png" alt="" class="calc" />
+            </div>
+            <video id="video2" class="video-js vjs-default-skin" autoplay preload="auto"  data-setup='{"techOrder": ["html5", "flash"]}' >
                 <source src="rtmp://172.19.41.101:1935/live/100G" type="rtmp/flv">
                 <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
             </video>
@@ -483,6 +492,7 @@
         $('.line10').width(calc * 121 + "px");
         $('.line11').width(calc * 18 + "px");
         $('.askProduct').width(calc * 59 + "px");
+        $('.tip').width(calc * 319 + "px");
         $('.right .btn5').width(calc * 176 + "px");
 
         $('#video1').width(calc * 485 + "px").height(calc * 275 + "px");
@@ -527,19 +537,14 @@
             $(item).css("top", calc * top + "px").css("left", calc * left + "px");
         });
 
+        $('.tip').each(function(index, item) {
+            var bottom = parseInt($(item).css("bottom"));
+            var left = parseInt($(item).css("left"));
+            $(item).css("bottom", calc * bottom + "px").css("left", calc * left + "px");
+        });
+
     }
 
     setCalc();
     init();
 </script>
-
-<!-- <script type="text/javascript">
-    var videoObject = {
-        container: '#video1', //容器的ID或className
-        variable: 'player',//播放函数名称
-        autoplay: false,
-        live: true,
-        video: 'rtmp://localhost:1935/live/test'
-    };
-    var player = new ckplayer(videoObject);
-</script> -->
