@@ -1,550 +1,691 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>锐捷数据中心</title>
-    <link href="./videojs/video-js.css" rel="stylesheet">
+    <link href="./videojs/video-js.css" rel="stylesheet" />
     <style type="text/css">
-        body{
-            background: url('./images/bg1.png');
-            background-size: cover;
-        }
+      body {
+        background: url("./images/bg1.png");
+        background-size: cover;
+      }
 
-        img{
-            display: block;
-            width: 100%;
-        }
+      img {
+        display: block;
+        width: 100%;
+      }
 
-        .section {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            margin: 0;
-            padding: 0px;
-            font-family: "Microsoft YaHei", YaHei, "微软雅黑", SimHei, "黑体";
-            font-size: 14px;
-            width: 100%;
-            height: 100%;
-            /* background: url('./images/bg2.png') no-repeat; */
-            background-size: auto 95%;
-            -ms-behavior: url(./backgroundsize.min.htc);
-            behavior: url(./backgroundsize.min.htc);
-            background-position: center;
-            overflow: hidden;
-        }
+      .model {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        display: none;
+      }
 
-        .section .left{
-            width: 50%;
-            display: block;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
+      .section {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0;
+        padding: 0px;
+        font-family: "Microsoft YaHei", YaHei, "微软雅黑", SimHei, "黑体";
+        font-size: 14px;
+        width: 100%;
+        height: 100%;
+        /* background: url('./images/bg2.png') no-repeat; */
+        background-size: auto 95%;
+        -ms-behavior: url(./backgroundsize.min.htc);
+        behavior: url(./backgroundsize.min.htc);
+        background-position: center;
+        overflow: hidden;
+        display: none;
+      }
 
-        .section .right{
-            width: 50%;
-            display: block;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            right: 0;
-        }
+      .section .left {
+        width: 50%;
+        display: block;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
 
-        .section .left .btn{
-            display: block;
-            cursor: pointer;
-            position: absolute;
-            right: 80px;
-        }
+      .section .right {
+        width: 50%;
+        display: block;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
 
-        .section .right .btn{
-            display: block;
-            cursor: pointer; 
-            position: absolute;
-            left: 320px;
-        }
+      .section .left .btn {
+        display: block;
+        cursor: pointer;
+        position: absolute;
+        right: 80px;
+      }
 
-        .section .left .btn img, .section .right .btn img{
-            width: 100%;
-        }
+      .section .right .btn {
+        display: block;
+        cursor: pointer;
+        position: absolute;
+        left: 320px;
+      }
 
-        .section .btn .down{
-            display: block;
-        }
+      .section .left .btn img,
+      .section .right .btn img {
+        width: 100%;
+      }
 
-        .section .btn .up{
-            display: none;
-        }
+      .section .btn img {
+        display: none;
+      }
 
-        .section .btn.active .down{
-            display: none;
-        }
+      .section .btn .down {
+        display: block;
+      }
 
-        .section .btn.active .up{
-            display: block;
-        }
+      .section .btn.active .up {
+        display: block;
+      }
 
-        .left .btn1{
-            top: 180px;
-        }
+      .section .btn.active .down {
+        display: none;
+      }
 
-        .left .btn2{
-            top: 260px;
-        }
-        .left .btn3{
-            top: 330px;
-        }
-        .left .btn4{
-            top: 410px;
-        }
-        .left .btn5{
-            top: 545px;
-        }
+      .section .btn.waiting .up,
+      .section .btn.waiting .down {
+        display: none;
+      }
 
-        .left .btn6{
-            top: 635px;
-        }
+      .section .btn.waiting .wait {
+        display: block;
+      }
 
-        .right .btn1{
-            top: 175px;
-        }
+      .section .btn .reset {
+        display: block;
+      }
 
-        .right .btn2{
-            top: 270px;
-        }
-        .right .btn3{
-            top: 340px;
-        }
-        .right .btn4{
-            top: 425px;
-        }
-        .section .right .btn5{
-            left: 280px;
-            top: 580px;
-        }
+      .section .btn.waiting .reset {
+        display: none;
+      }
 
+      .left .btn1 {
+        top: 180px;
+      }
 
-        .linebox{
-            display: block;
-            width: 336px;
-            height: 438px;
-            cursor: pointer;
-            position: absolute;
-            right: 255px;
-            top: 190px;
-        }
+      .left .btn2 {
+        top: 260px;
+      }
+      .left .btn3 {
+        top: 330px;
+      }
+      .left .btn4 {
+        top: 410px;
+      }
+      .left .btn5 {
+        top: 545px;
+      }
 
-        .linebox .line {
-            position: absolute;
-        }
+      .left .btn6 {
+        top: 635px;
+      }
 
-        .linebox .line .error {
-            display: none;
-        }
+      .right .btn1 {
+        top: 175px;
+      }
 
-        .linebox .disable img {
-            display: none;
-        }
+      .right .btn2 {
+        top: 270px;
+      }
+      .right .btn3 {
+        top: 340px;
+      }
+      .right .btn4 {
+        top: 425px;
+      }
+      .section .right .btn5 {
+        left: 280px;
+        top: 580px;
+      }
 
-        .linebox .disable .error {
-            display: inline-block;
-        }
+      .linebox {
+        display: block;
+        width: 336px;
+        height: 438px;
+        cursor: pointer;
+        position: absolute;
+        right: 255px;
+        top: 190px;
+      }
 
-        .linebox .line1 {
-            top: 60px;
-            left: 105px;
-        }
+      .linebox .line {
+        position: absolute;
+      }
 
-        .linebox .line2 {
-            top: 60px;
-            left: 150px;
-        }
+      .linebox .line .error {
+        display: none;
+      }
 
-        .linebox .line3 {
-            top: 168px;
-            left: 90px;
-        }
+      .linebox .disable img {
+        display: none;
+      }
 
-        .linebox .line4 {
-            top: 168px;
-            left: 200px;
-        }
+      .linebox .disable .error {
+        display: inline-block;
+      }
 
-        .linebox .line5 {
-            top: 164px;
-            left: 97px;
-        }
+      .linebox .line1 {
+        top: 60px;
+        left: 105px;
+      }
 
-        .linebox .line6 {
-            top: 164px;
-            left: 97px;
-        }
+      .linebox .line2 {
+        top: 60px;
+        left: 150px;
+      }
 
-        .linebox .line7 {
-            top: 268px;
-            left: 90px;
-        }
+      .linebox .line3 {
+        top: 168px;
+        left: 90px;
+      }
 
-        .linebox .line8 {
-            top: 268px;
-            left: 200px;
-        }
+      .linebox .line4 {
+        top: 168px;
+        left: 200px;
+      }
 
-        .linebox .line9 {
-            top: 264px;
-            left: 97px;
-        }
+      .linebox .line5 {
+        top: 164px;
+        left: 97px;
+      }
 
-        .linebox .line10 {
-            top: 264px;
-            left: 97px;
-        }
+      .linebox .line6 {
+        top: 164px;
+        left: 97px;
+      }
 
-        .linebox .line11 {
-            top: 367px;
-            left: 147px;
-        }
+      .linebox .line7 {
+        top: 268px;
+        left: 90px;
+      }
 
-        .askProduct{
-            position: absolute;
-            left: 530px;
-            top: 270px;
-            cursor: pointer;
-        }
+      .linebox .line8 {
+        top: 268px;
+        left: 200px;
+      }
 
-        #video1, #video2{
-            position: absolute !important;
-        }
+      .linebox .line9 {
+        top: 264px;
+        left: 97px;
+      }
 
-        #video1{
-            bottom: 28px;
-            right: 107px;
-        }
-        #video2{
-            bottom: 65px;
-            left: 272px;
-        }
+      .linebox .line10 {
+        top: 264px;
+        left: 97px;
+      }
 
-        .tip{
-            bottom: 300px;
-            left: 270px;
-            position: absolute;
-        }
+      .linebox .line11 {
+        top: 367px;
+        left: 147px;
+      }
 
-    </style> 
+      .askProduct {
+        position: absolute;
+        left: 530px;
+        top: 270px;
+        cursor: pointer;
+      }
+
+      #video1,
+      #video2 {
+        position: absolute !important;
+      }
+
+      #video1 {
+        bottom: 28px;
+        right: 107px;
+      }
+      #video2 {
+        bottom: 65px;
+        left: 272px;
+      }
+
+      .tip {
+        bottom: 300px;
+        left: 270px;
+        position: absolute;
+      }
+
+      .confirmBox {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+        display: none;
+      }
+
+      .confirmBox .sure,
+      .confirmBox .cancel {
+        cursor: pointer;
+        display: inline-block;
+        position: absolute;
+      }
+    </style>
     <script src="./videojs/videojs-ie8.min.js"></script>
-</head>
-
-<body>
+  </head>
+  <body>
     <div class="section">
-        <img src="./images/bg2.png" alt="" class="calc" />
-        <div class="left">
-            <span class="btn btn1">
-                <img src="./images/server_L1down.png" alt="" class="calc down" />
-                <img src="./images/server_L1up.png" alt="" class="calc up" />
-            </span>
-            <span class="btn btn2">
-                <img src="./images/server_L2down.png" alt="" class="calc down" />
-                <img src="./images/server_L2up.png" alt="" class="calc up" />
-            </span>
-            <span class="btn btn3">
-                <img src="./images/down_L2down.png" alt="" class="calc down" />
-                <img src="./images/down_L2up.png" alt="" class="calc up" />
-            </span>
-            <span class="btn btn4">
-                <img src="./images/down_L1down.png" alt="" class="calc down" />
-                <img src="./images/down_L1up.png" alt="" class="calc up" />
-            </span>
-            <span class="btn btn5">
-                <img src="./images/down_L2down.png" alt="" class="calc down" />
-                <img src="./images/down_L2up.png" alt="" class="calc up" />
-            </span>
-            <span class="btn btn6">
-                <img src="./images/down_L1down.png" alt="" class="calc down" />
-                <img src="./images/down_L1up.png" alt="" class="calc up" />
-            </span>
+      <img src="./images/bg2.png" alt="" class="calc bg" />
+      <div class="confirmBox">
+        <img src="./images/confirm.png" alt="" class="calc confirm" />
+        <span class="sure"></span>
+        <span class="cancel"></span>
+      </div>
 
-            <div class="linebox">
-                <span class="line line1">
-                    <img src="./images/a.png" alt="" class="calc " />
-                    <img src="./images/aa.png" alt="" class="calc error" />
-                </span>
-                <span class="line line2">
-                    <img src="./images/b.png" alt="" class="calc " />
-                    <img src="./images/bb.png" alt="" class="calc error" />
-                </span>
-                <span class="line line3">
-                    <img src="./images/g.png" alt="" class="calc " />
-                    <img src="./images/gg.png" alt="" class="calc error" />
-                </span>
-                <span class="line line4">
-                    <img src="./images/g.png" alt="" class="calc " />
-                    <img src="./images/gg.png" alt="" class="calc error" />
-                </span>
-                <span class="line line5">
-                    <img src="./images/d.png" alt="" class="calc " />
-                    <img src="./images/dd.png" alt="" class="calc error" />
-                </span>
-                <span class="line line6">
-                    <img src="./images/c.png" alt="" class="calc " />
-                    <img src="./images/cc.png" alt="" class="calc error" />
-                </span>
-                <span class="line line7">
-                    <img src="./images/g.png" alt="" class="calc " />
-                    <img src="./images/gg.png" alt="" class="calc error" />
-                </span>
-                <span class="line line8">
-                    <img src="./images/g.png" alt="" class="calc " />
-                    <img src="./images/gg.png" alt="" class="calc error" />
-                </span>
-                <span class="line line9">
-                    <img src="./images/d.png" alt="" class="calc " />
-                    <img src="./images/dd.png" alt="" class="calc error" />
-                </span>
-                <span class="line line10">
-                    <img src="./images/c.png" alt="" class="calc " />
-                    <img src="./images/cc.png" alt="" class="calc error" />
-                </span>
-                <span class="line line11">
-                    <img src="./images/g.png" alt="" class="calc " />
-                    <img src="./images/gg.png" alt="" class="calc error" />
-                </span>
-            </div>
-            <video id="video1" class="video-js vjs-default-skin" autoplay preload="auto"  data-setup="{}">
-                <source src="rtmp://172.19.1.211:1935/live/test" type="rtmp/flv">
-                <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
-            </video>
+      <div class="left">
+        <span class="btn btn1">
+          <img src="./images/server_L1down.png" alt="" class="calc down" />
+          <img src="./images/server_L1up.png" alt="" class="calc up" />
+          <img src="./images/small_wait.png" alt="" class="calc wait" />
+        </span>
+        <span class="btn btn2">
+          <img src="./images/server_L2down.png" alt="" class="calc down" />
+          <img src="./images/server_L2up.png" alt="" class="calc up" />
+          <img src="./images/small_wait.png" alt="" class="calc wait" />
+        </span>
+        <span class="btn btn3">
+          <img src="./images/down_L2down.png" alt="" class="calc down" />
+          <img src="./images/down_L2up.png" alt="" class="calc up" />
+          <img src="./images/small_wait.png" alt="" class="calc wait" />
+        </span>
+        <span class="btn btn4">
+          <img src="./images/down_L1down.png" alt="" class="calc down" />
+          <img src="./images/down_L1up.png" alt="" class="calc up" />
+          <img src="./images/small_wait.png" alt="" class="calc wait" />
+        </span>
+        <span class="btn btn5">
+          <img src="./images/down_L2down.png" alt="" class="calc down" />
+          <img src="./images/down_L2up.png" alt="" class="calc up" />
+          <img src="./images/small_wait.png" alt="" class="calc wait" />
+        </span>
+        <span class="btn btn6">
+          <img src="./images/down_L1down.png" alt="" class="calc down" />
+          <img src="./images/down_L1up.png" alt="" class="calc up" />
+          <img src="./images/small_wait.png" alt="" class="calc wait" />
+        </span>
+
+        <div class="linebox">
+          <span class="line line1">
+            <img src="./images/a.png" alt="" class="calc " />
+            <img src="./images/aa.png" alt="" class="calc error" />
+          </span>
+          <span class="line line2">
+            <img src="./images/b.png" alt="" class="calc " />
+            <img src="./images/bb.png" alt="" class="calc error" />
+          </span>
+          <span class="line line3">
+            <img src="./images/g.png" alt="" class="calc " />
+            <img src="./images/gg.png" alt="" class="calc error" />
+          </span>
+          <span class="line line4">
+            <img src="./images/g.png" alt="" class="calc " />
+            <img src="./images/gg.png" alt="" class="calc error" />
+          </span>
+          <span class="line line5">
+            <img src="./images/d.png" alt="" class="calc " />
+            <img src="./images/dd.png" alt="" class="calc error" />
+          </span>
+          <span class="line line6">
+            <img src="./images/c.png" alt="" class="calc " />
+            <img src="./images/cc.png" alt="" class="calc error" />
+          </span>
+          <span class="line line7">
+            <img src="./images/g.png" alt="" class="calc " />
+            <img src="./images/gg.png" alt="" class="calc error" />
+          </span>
+          <span class="line line8">
+            <img src="./images/g.png" alt="" class="calc " />
+            <img src="./images/gg.png" alt="" class="calc error" />
+          </span>
+          <span class="line line9">
+            <img src="./images/d.png" alt="" class="calc " />
+            <img src="./images/dd.png" alt="" class="calc error" />
+          </span>
+          <span class="line line10">
+            <img src="./images/c.png" alt="" class="calc " />
+            <img src="./images/cc.png" alt="" class="calc error" />
+          </span>
+          <span class="line line11">
+            <img src="./images/g.png" alt="" class="calc " />
+            <img src="./images/gg.png" alt="" class="calc error" />
+          </span>
         </div>
-        <div class="right">
-            <span class="btn btn1">
-                <img src="./images/up_L1down.png" alt="" class="calc down" />
-                <img src="./images/up_L1up.png" alt="" class="calc up" />
-            </span>
-            <span class="btn btn2">
-                <img src="./images/up_L2down.png" alt="" class="calc down" />
-                <img src="./images/up_L2up.png" alt="" class="calc up" />
-            </span>
-            <span class="btn btn3">
-                <img src="./images/up_L1down.png" alt="" class="calc down" />
-                <img src="./images/up_L1up.png" alt="" class="calc up" />
-            </span>
-            <span class="btn btn4">
-                <img src="./images/up_L2down.png" alt="" class="calc down" />
-                <img src="./images/up_L2up.png" alt="" class="calc up" />
-            </span>
-            <span class="btn btn5">
-                <img src="./images/reset.png" alt="" class="calc" />
-            </span>
+        <video
+          id="video1"
+          class="video-js vjs-default-skin"
+          autoplay
+          preload="auto"
+          data-setup="{}"
+        >
+          <source src="rtmp://172.19.1.211:1935/live/test" type="rtmp/flv" />
+          <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading
+            to a web browser that
+            <a href="http://videojs.com/html5-video-support/" target="_blank"
+              >supports HTML5 video</a
+            >
+          </p>
+        </video>
+      </div>
+      <div class="right">
+        <span class="btn btn1">
+          <img src="./images/up_L1down.png" alt="" class="calc down" />
+          <img src="./images/up_L1up.png" alt="" class="calc up" />
+          <img src="./images/small_wait.png" alt="" class="calc wait" />
+        </span>
+        <span class="btn btn2">
+          <img src="./images/up_L2down.png" alt="" class="calc down" />
+          <img src="./images/up_L2up.png" alt="" class="calc up" />
+          <img src="./images/small_wait.png" alt="" class="calc wait" />
+        </span>
+        <span class="btn btn3">
+          <img src="./images/up_L1down.png" alt="" class="calc down" />
+          <img src="./images/up_L1up.png" alt="" class="calc up" />
+          <img src="./images/small_wait.png" alt="" class="calc wait" />
+        </span>
+        <span class="btn btn4">
+          <img src="./images/up_L2down.png" alt="" class="calc down" />
+          <img src="./images/up_L2up.png" alt="" class="calc up" />
+          <img src="./images/small_wait.png" alt="" class="calc wait" />
+        </span>
+        <span class="btn btn5">
+          <img src="./images/reset.png" alt="" class="calc reset" />
+          <img src="./images/large_small.png" alt="" class="calc wait" />
+        </span>
 
-            <div class="askProduct">
-                <a href="http://www.ruijie.com.cn/consult/" target="_blank"> 
-                    <img src="./images/askProduct.png" alt="" class="calc" />
-                </a>
-            </div>
-
-            <div class="tip">
-                <img src="./images/tip.png" alt="" class="calc" />
-            </div>
-            <video id="video2" class="video-js vjs-default-skin" autoplay preload="auto"  data-setup='{"techOrder": ["html5", "flash"]}' >
-                <source src="rtmp://172.19.41.101:1935/live/100G" type="rtmp/flv">
-                <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
-            </video>
+        <div class="askProduct">
+          <a href="http://www.ruijie.com.cn/consult/" target="_blank">
+            <img src="./images/askProduct.png" alt="" class="calc" />
+          </a>
         </div>
+
+        <div class="tip">
+          <img src="./images/tip.png" alt="" class="calc" />
+        </div>
+        <video
+          id="video2"
+          class="video-js vjs-default-skin"
+          autoplay
+          preload="auto"
+          data-setup='{"techOrder": ["html5", "flash"]}'
+        >
+          <source src="rtmp://172.19.41.101:1935/live/100G" type="rtmp/flv" />
+          <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading
+            to a web browser that
+            <a href="http://videojs.com/html5-video-support/" target="_blank"
+              >supports HTML5 video</a
+            >
+          </p>
+        </video>
+      </div>
     </div>
-</body>
+
+    <div class="model"></div>
+  </body>
 </html>
 
 <script src="./videojs/video.min.js"></script>
 <script>
-    videojs.options.flash.swf = "videojs/video-js.swf";
+  videojs.options.flash.swf = "videojs/video-js.swf";
 </script>
 <script src="./javascripts/jquery-1.8.0.min.js"></script>
 
 <script>
-    function init() {
-            $(".left .btn1").on("click", function() {
-                if($(this).hasClass("active")){
-                    runBat("服务器L1 up", toggle.bind({tar:".line1", that: this}));
-                }else{
-                    runBat("服务器L1 down", toggle.bind({tar:".line1", that: this}));
-                }
-                
-            })
-            $(".left .btn2").on("click", function() {
-                if($(this).hasClass("active")){
-                    runBat("服务器L2 up", toggle.bind({tar:".line2", that: this}));
-                }else{
-                    runBat("服务器L2 down", toggle.bind({tar:".line2", that: this}));
-                }
-                
-            })
-            $(".left .btn3").on("click", function() {
-                if($(this).hasClass("active")){
-                    runBat("下联L2 up", toggle.bind({tar:".line6", that: this}));
-                }else{
-                    runBat("下联L2 down", toggle.bind({tar:".line6", that: this}));
-                }
-            })
-            $(".left .btn4").on("click", function() {
-                if($(this).hasClass("active")){
-                    runBat("下联L1 up", toggle.bind({tar:".line5", that: this}));
-                }else{
-                    runBat("下联L1 down", toggle.bind({tar:".line5", that: this}));
-                }
-                
-            })
-            $(".left .btn5").on("click", function() {
-                if($(this).hasClass("active")){
-                    runBat("下联1_L2 up", toggle.bind({tar:".line10", that: this}));
-                }else{
-                    runBat("下联1_L2 down", toggle.bind({tar:".line10", that: this}));
-                }
-                
-            })
-            $(".left .btn6").on("click", function() {
-                if($(this).hasClass("active")){
-                    runBat("下联1_L1 up", toggle.bind({tar:".line9", that: this}));
-                }else{
-                    runBat("下联1_L1 down", toggle.bind({tar:".line9", that: this}));
-                }
-                
-            })
+  function init() {
+    $(".left .btn1").on("click", function() {
+      if ($(this).hasClass("active")) {
+        runBat("服务器L1 up", toggle.bind({ tar: ".line1", that: this }));
+      } else {
+        runBat("服务器L1 down", toggle.bind({ tar: ".line1", that: this }));
+      }
+    });
+    $(".left .btn2").on("click", function() {
+      if ($(this).hasClass("active")) {
+        runBat("服务器L2 up", toggle.bind({ tar: ".line2", that: this }));
+      } else {
+        runBat("服务器L2 down", toggle.bind({ tar: ".line2", that: this }));
+      }
+    });
+    $(".left .btn3").on("click", function() {
+      if ($(this).hasClass("active")) {
+        runBat("下联L2 up", toggle.bind({ tar: ".line6", that: this }));
+      } else {
+        runBat("下联L2 down", toggle.bind({ tar: ".line6", that: this }));
+      }
+    });
+    $(".left .btn4").on("click", function() {
+      if ($(this).hasClass("active")) {
+        runBat("下联L1 up", toggle.bind({ tar: ".line5", that: this }));
+      } else {
+        runBat("下联L1 down", toggle.bind({ tar: ".line5", that: this }));
+      }
+    });
+    $(".left .btn5").on("click", function() {
+      if ($(this).hasClass("active")) {
+        runBat("下联1_L2 up", toggle.bind({ tar: ".line10", that: this }));
+      } else {
+        runBat("下联1_L2 down", toggle.bind({ tar: ".line10", that: this }));
+      }
+    });
+    $(".left .btn6").on("click", function() {
+      if ($(this).hasClass("active")) {
+        runBat("下联1_L1 up", toggle.bind({ tar: ".line9", that: this }));
+      } else {
+        runBat("下联1_L1 down", toggle.bind({ tar: ".line9", that: this }));
+      }
+    });
 
-            $(".right .btn1").on("click", function() {
-                if($(this).hasClass("active")){
-                    runBat("上联L1 up", toggle.bind({tar:".line3", that: this}));
-                }else{
-                    runBat("上联L1 down", toggle.bind({tar:".line3", that: this}));
-                }
-                
-            })
-            $(".right .btn2").on("click", function() {
-                if($(this).hasClass("active")){
-                    runBat("上联L2 up", toggle.bind({tar:".line4", that: this}));
-                }else{
-                    runBat("上联L2 down", toggle.bind({tar:".line4", that: this}));
-                }
-                
-            })
-            $(".right .btn3").on("click", function() {
-                if($(this).hasClass("active")){
-                    runBat("上联1_L1 up", toggle.bind({tar:".line7", that: this}));
-                }else{
-                    runBat("上联1_L1 down", toggle.bind({tar:".line7", that: this}));
-                }
-                
-            })
-            $(".right .btn4").on("click", function() {
-                if($(this).hasClass("active")){
-                    runBat("上联1_L2 up", toggle.bind({tar:".line8", that: this}));
-                }else{
-                    runBat("上联1_L2 down", toggle.bind({tar:".line8", that: this}));
-                }
-                
-            })
-            $(".right .btn5").on("click", function() {
-                runBat("一键还原", toggle.bind({tar:".line", that: this}));
-            })
+    $(".right .btn1").on("click", function() {
+      if ($(this).hasClass("active")) {
+        runBat("上联L1 up", toggle.bind({ tar: ".line3", that: this }));
+      } else {
+        runBat("上联L1 down", toggle.bind({ tar: ".line3", that: this }));
+      }
+    });
+    $(".right .btn2").on("click", function() {
+      if ($(this).hasClass("active")) {
+        runBat("上联L2 up", toggle.bind({ tar: ".line4", that: this }));
+      } else {
+        runBat("上联L2 down", toggle.bind({ tar: ".line4", that: this }));
+      }
+    });
+    $(".right .btn3").on("click", function() {
+      if ($(this).hasClass("active")) {
+        runBat("上联1_L1 up", toggle.bind({ tar: ".line7", that: this }));
+      } else {
+        runBat("上联1_L1 down", toggle.bind({ tar: ".line7", that: this }));
+      }
+    });
+    $(".right .btn4").on("click", function() {
+      if ($(this).hasClass("active")) {
+        runBat("上联1_L2 up", toggle.bind({ tar: ".line8", that: this }));
+      } else {
+        runBat("上联1_L2 down", toggle.bind({ tar: ".line8", that: this }));
+      }
+    });
+    $(".right .btn5").on("click", function() {
+      if (!$(".waiting").length) {
+        $(".confirmBox").show();
+        $(".model").show();
+      }
+    });
+
+    $(".confirmBox .sure").on("click", function() {
+      $(".confirmBox").hide();
+      $(".model").hide();
+      runBat("一键还原", resetCallBack.bind({ tar: ".line"}));
+    });
+
+    $(".confirmBox .cancel").on("click", function() {
+      $(".confirmBox").hide();
+      $(".model").hide();
+    });
+
+    $(".section").show();
+  }
+  function runBat(name, calback) {
+    if (!$(".waiting").length) {
+      $.post("runBat", { batName: name }, function(res) {
+        if (res.code) {
+          calback();
+        } else {
+          alert("运行失败！");
         }
-    function runBat (name, calback){
-        $.post("runBat", { batName: name }, function (res) {
-            if (res.code) {
-                // alert("运行成功！")
-                calback();
-            } else {
-                alert("运行失败！")
-            }
-        });
+      });
     }
-    function toggle(){
-        if(this.tar != ".line"){
-            $(this.that).toggleClass("active");
-            $(this.tar).toggleClass("disable");
-        }else{
-            $(this.that).removeClass("active");
-            $(this.tar).removeClass("disable");
-        }
-    }
-    function setCalc(params) {
-        var clientHeight = document.documentElement.clientHeight;
-        if (!clientHeight) return;
-        window.calc = clientHeight / (1080 * 0.95);
+  }
+  function toggle() {
+    $(this.that).toggleClass("waiting");
+    setTimeout(() => {
+      if (this.tar != ".line") {
+        $(this.that).toggleClass("active");
+        $(this.tar).toggleClass("disable");
+      } else {
+        $(this.that).removeClass("active");
+        $(this.tar).removeClass("disable");
+      }
+      $(this.that).toggleClass("waiting");
+    }, 5000);
+  }
+  function setCalc(params) {
+    var clientHeight = document.documentElement.clientHeight;
+    if (!clientHeight) return;
+    window.calc = clientHeight / (1080 * 0.95);
 
-        $('.section > img').height(clientHeight * 0.95 + "px").width("auto").css("margin", "auto").css("marginTop", clientHeight * 0.025 + "px");
+    $(".section > .bg")
+      .height(clientHeight * 0.95 + "px")
+      .width("auto")
+      .css("margin", "auto")
+      .css("marginTop", clientHeight * 0.025 + "px");
 
-        $('.btn').width(calc * 141 + "px");
+    $(".section > .confirmBox").width(calc * 407 + "px");
+    $(".section > .confirmBox .sure")
+      .width(calc * 128 + "px")
+      .height(calc * 37 + "px")
+      .css("bottom", calc * 11 + "px")
+      .css("left", calc * 26 + "px");
+    $(".section > .confirmBox .cancel")
+      .width(calc * 128 + "px")
+      .height(calc * 37 + "px")
+      .css("bottom", calc * 11 + "px")
+      .css("right", calc * 19 + "px");
 
-        $('.line1').width(calc * 55 + "px");
-        $('.line2').width(calc * 55 + "px");
-        $('.line3').width(calc * 26 + "px");
-        $('.line4').width(calc * 26 + "px");
-        $('.line5').width(calc * 121 + "px");
-        $('.line6').width(calc * 121 + "px");
+    $(".btn").width(calc * 141 + "px");
 
-        $('.line7').width(calc * 26 + "px");
-        $('.line8').width(calc * 26 + "px");
-        $('.line9').width(calc * 121 + "px");
-        $('.line10').width(calc * 121 + "px");
-        $('.line11').width(calc * 18 + "px");
-        $('.askProduct').width(calc * 59 + "px");
-        $('.tip').width(calc * 319 + "px");
-        $('.right .btn5').width(calc * 176 + "px");
+    $(".line1").width(calc * 55 + "px");
+    $(".line2").width(calc * 55 + "px");
+    $(".line3").width(calc * 26 + "px");
+    $(".line4").width(calc * 26 + "px");
+    $(".line5").width(calc * 121 + "px");
+    $(".line6").width(calc * 121 + "px");
 
-        $('#video1').width(calc * 485 + "px").height(calc * 275 + "px");
-        $('#video2').width(calc * 325 + "px").height(calc * 185 + "px");
-        $('.linebox').width(calc * 336 + "px").height(calc * 438 + "px").css("top", calc * parseInt($('.linebox').css("top")) + "px").css("right", calc * parseInt($('.linebox').css("right")) + "px");
+    $(".line7").width(calc * 26 + "px");
+    $(".line8").width(calc * 26 + "px");
+    $(".line9").width(calc * 121 + "px");
+    $(".line10").width(calc * 121 + "px");
+    $(".line11").width(calc * 18 + "px");
+    $(".askProduct").width(calc * 59 + "px");
+    $(".tip").width(calc * 319 + "px");
+    $(".right .btn5").width(calc * 176 + "px");
 
-        $('.left .btn').each(function(index, item) {
-            var top = parseInt($(item).css("top"));
-            var right = parseInt($(item).css("right"));
-            $(item).css("top", calc * top + "px").css("right", calc * right + "px");
-        });
+    $("#video1")
+      .width(calc * 485 + "px")
+      .height(calc * 275 + "px");
+    $("#video2")
+      .width(calc * 325 + "px")
+      .height(calc * 185 + "px");
+    $(".linebox")
+      .width(calc * 336 + "px")
+      .height(calc * 438 + "px")
+      .css("top", calc * parseInt($(".linebox").css("top")) + "px")
+      .css("right", calc * parseInt($(".linebox").css("right")) + "px");
 
-        $('.right .btn').each(function(index, item) {
-            var top = parseInt($(item).css("top"));
-            var left = parseInt($(item).css("left"));
-            $(item).css("top", calc * top + "px").css("left", calc * left + "px");
-        });
+    $(".left .btn").each(function(index, item) {
+      var top = parseInt($(item).css("top"));
+      var right = parseInt($(item).css("right"));
+      $(item)
+        .css("top", calc * top + "px")
+        .css("right", calc * right + "px");
+    });
 
+    $(".right .btn").each(function(index, item) {
+      var top = parseInt($(item).css("top"));
+      var left = parseInt($(item).css("left"));
+      $(item)
+        .css("top", calc * top + "px")
+        .css("left", calc * left + "px");
+    });
 
-        $('.left .video-js').each(function(index, item) {
-            var bottom = parseInt($(item).css("bottom"));
-            var right = parseInt($(item).css("right"));
-            $(item).css("bottom", calc * bottom + "px").css("right", calc * right + "px");
-        });
+    $(".left .video-js").each(function(index, item) {
+      var bottom = parseInt($(item).css("bottom"));
+      var right = parseInt($(item).css("right"));
+      $(item)
+        .css("bottom", calc * bottom + "px")
+        .css("right", calc * right + "px");
+    });
 
-        $('.right .video-js').each(function(index, item) {
-            var bottom = parseInt($(item).css("bottom"));
-            var left = parseInt($(item).css("left"));
-            $(item).css("bottom", calc * bottom + "px").css("left", calc * left + "px");
-        });
+    $(".right .video-js").each(function(index, item) {
+      var bottom = parseInt($(item).css("bottom"));
+      var left = parseInt($(item).css("left"));
+      $(item)
+        .css("bottom", calc * bottom + "px")
+        .css("left", calc * left + "px");
+    });
 
+    $(".line").each(function(index, item) {
+      var top = parseInt($(item).css("top"));
+      var left = parseInt($(item).css("left"));
+      $(item)
+        .css("top", calc * top + "px")
+        .css("left", calc * left + "px");
+    });
 
-        $('.line').each(function(index, item) {
-            var top = parseInt($(item).css("top"));
-            var left = parseInt($(item).css("left"));
-            $(item).css("top", calc * top + "px").css("left", calc * left + "px");
-        });
+    $(".askProduct").each(function(index, item) {
+      var top = parseInt($(item).css("top"));
+      var left = parseInt($(item).css("left"));
+      $(item)
+        .css("top", calc * top + "px")
+        .css("left", calc * left + "px");
+    });
 
-        $('.askProduct').each(function(index, item) {
-            var top = parseInt($(item).css("top"));
-            var left = parseInt($(item).css("left"));
-            $(item).css("top", calc * top + "px").css("left", calc * left + "px");
-        });
-
-        $('.tip').each(function(index, item) {
-            var bottom = parseInt($(item).css("bottom"));
-            var left = parseInt($(item).css("left"));
-            $(item).css("bottom", calc * bottom + "px").css("left", calc * left + "px");
-        });
-
-    }
-
-    setCalc();
-    init();
+    $(".tip").each(function(index, item) {
+      var bottom = parseInt($(item).css("bottom"));
+      var left = parseInt($(item).css("left"));
+      $(item)
+        .css("bottom", calc * bottom + "px")
+        .css("left", calc * left + "px");
+    });
+  }
+  function resetCallBack() {
+    $(".btn").toggleClass("waiting");
+    setTimeout(() => {
+      $(".btn").removeClass("active");
+      $(this.tar).removeClass("disable");
+      $(".btn").toggleClass("waiting");
+    }, 40000);
+  }
+  setCalc();
+  init();
 </script>
